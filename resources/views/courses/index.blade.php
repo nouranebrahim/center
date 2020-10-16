@@ -27,58 +27,18 @@
     <td> <a href="{{route('courses.edit',['course'=> $course->id])}}"
          class="btn btn-primary  float-left mb-2 mr-2">Edit</a> </td>
 
-         <td><a class="btn btn-danger" href="#" role="button" data-toggle="modal" data-target="#delete-modal-{{$course->id}}">Delete</a></td>
-      <div class="modal fade" id="delete-modal-{{$course->id}}" tobindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <form method="POST"  action="{{route('courses.destroy',$course->id)}}">
-                      @csrf
-                      @method('DELETE')
-                      <div class="modal-header">
-                        <h5 class="modal-title">Delete course #{{$course->id}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        Click delete to delete the course!
-                        
-                      </div>
-                      <div class="modal-body">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-
-                      </div>
-
-                    </form>
-                    </div>
-                  </div>
-              </div>
-             
+     <td>    <form method="POST" action="{{route('courses.destroy',['course' => $course->id])}}"
+          class="float-right">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-danger mr-2"
+          onclick="return confirm ('are you sure?')">Delete</button>
+          </form> 
+     </td>        
    @endforeach
     </tr>
-    <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-      @if($course)
-      <a href="{{route('courses.destroy',['course'=> $course->id])}}" class="btn btn-warning">yes</a>
-      <a href="{{route('courses.index')}}" class="btn btn-warning">no</a>
-      @endif 
-      </div>
-    </div>
+    
    
-  </div>
-</div>
 
   </tbody>
 </table>

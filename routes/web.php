@@ -20,30 +20,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-// Auth::routes(['verify'=>true]);
 
+Auth::routes(['verify'=>true]);
+Route::group(['middleware'=>'auth'],function(){
 Route::get('/courses', [ CourseController::class, 'index'])->name('courses.index'); 
-Route::get('/courses/create', [ CourseController::class, 'create'])->name('courses.create');  
+Route::get('/courses/create', [ CourseController::class, 'create'])->name('courses.create'); 
 Route::post('/courses/store', [ CourseController::class, 'store'])->name('courses.store'); 
-Route::get('/courses/edit', [ CourseController::class, 'edit'])->name('courses.edit');  
+Route::get('/courses/edit', [ CourseController::class, 'edit'])->name('courses.edit'); 
 Route::post('/courses/update', [ CourseController::class, 'update'])->name('courses.update');  
 Route::get('/courses/{course}', [ CourseController::class, 'show'])->name('courses.show');  
 Route::delete('/courses/{course}/destroy', [ CourseController::class, 'destroy'])->name('courses.destroy');  
-Route::get('/enroll/{course}', [ CourseController::class, 'enroll'])->name('courses.enroll');  
+Route::get('/enroll/{course}', [ CourseController::class, 'enroll'])->name('courses.enroll'); }); 
 // ######################################################
-
-Route::get('/users', [ UserController::class, 'index'])->name('users.index'); 
+Route::group(['middleware'=>'auth'],function(){
+Route::get('/users', [ UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [ UserController::class, 'create'])->name('users.create');  
 Route::post('/users/store', [ UserController::class, 'store'])->name('users.store'); 
 Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');  
 Route::post('/users/update', [ UserController::class, 'update'])->name('users.update');  
 
 Route::get('/users/{user}', [ UserController::class, 'show'])->name('users.show');  
-Route::delete('/users/{user}/destroy', [ UserController::class, 'destroy'])->name('users.destroy');  
+Route::delete('/users/{user}/destroy', [ UserController::class, 'destroy'])->name('users.destroy');});   
 
 
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');

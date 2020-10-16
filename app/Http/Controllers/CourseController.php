@@ -27,8 +27,9 @@ class CourseController extends Controller
     }
     public function create(){
         $users = User::all();
-       
+        if (auth()->user()->hasRole('admin')) {
         return view('courses/create',['users'=>$users]);
+        }
     }
 
     function store(){
@@ -61,12 +62,12 @@ class CourseController extends Controller
 
         $courseId = $request->course;
         $course = Course::find($courseId);
-        
+        if (auth()->user()->hasRole('admin')) {
             return view('courses/edit', [
                 'course' => $course,
                
             ]);
-        
+            }
         
     }
     public function update()
@@ -85,8 +86,9 @@ class CourseController extends Controller
         $request = request();
        
         $courseId = $request->course;
+        if (auth()->user()->hasRole('admin')) {
         
-        Course::destroy($courseId);
+        Course::destroy($courseId);}
       
         return redirect()->route('courses.index');
 
