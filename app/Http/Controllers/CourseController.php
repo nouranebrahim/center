@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class CourseController extends Controller
@@ -15,11 +16,14 @@ class CourseController extends Controller
         // $userId = Auth::id();
         // $user = User::find($userId);
         $courses = Course::all();
-        
+        if (auth()->user()->hasRole('admin')) {
             return view('courses/index', [
                 'courses' => $courses,
             ]);
-        
+        }else{
+            return view('courses/indexx', [
+                'courses' => $courses]);
+        }
     }
     public function create(){
         $users = User::all();
@@ -81,12 +85,19 @@ class CourseController extends Controller
         $request = request();
        
         $courseId = $request->course;
-        // dd($orderId);
+        
         Course::destroy($courseId);
       
         return redirect()->route('courses.index');
 
     }
-
+    public function enroll(){
+        $request = request();
+        $courseId=$request->course;
+        $course = Course::find($courseId);
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $user->courses()->attach($course);
+    }
 
 }

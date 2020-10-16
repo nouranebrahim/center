@@ -27,9 +27,9 @@ Route::get('/courses/create', [ CourseController::class, 'create'])->name('cours
 Route::post('/courses/store', [ CourseController::class, 'store'])->name('courses.store'); 
 Route::get('/courses/edit', [ CourseController::class, 'edit'])->name('courses.edit');  
 Route::post('/courses/update', [ CourseController::class, 'update'])->name('courses.update');  
-
 Route::get('/courses/{course}', [ CourseController::class, 'show'])->name('courses.show');  
 Route::delete('/courses/{course}/destroy', [ CourseController::class, 'destroy'])->name('courses.destroy');  
+Route::get('/enroll/{course}', [ CourseController::class, 'enroll'])->name('courses.enroll');  
 // ######################################################
 
 Route::get('/users', [ UserController::class, 'index'])->name('users.index'); 
