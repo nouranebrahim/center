@@ -27,7 +27,7 @@
     <td> <a href="{{route('users.edit',['user'=> $user->id])}}"
          class="btn btn-primary  float-left mb-2 mr-2">Edit</a> </td>
      
-         <td>    <form method="POST" action="{{route('courses.destroy',['course' => $course->id])}}"
+         <td>    <form method="POST" action="{{route('users.destroy',['user' => $user->id])}}"
           class="float-right">
           @csrf
           @method('DELETE')
