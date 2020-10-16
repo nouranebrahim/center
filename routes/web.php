@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
 // Auth::routes(['verify'=>true]);
 
 Route::get('/courses', [ CourseController::class, 'index'])->name('courses.index'); 
