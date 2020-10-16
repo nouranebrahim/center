@@ -70,10 +70,10 @@
         <p>Some text in the modal.</p>
       </div>
       <div class="modal-footer">
-      
+      @if($course)
       <a href="{{route('courses.destroy',['course'=> $course->id])}}" class="btn btn-warning">yes</a>
       <a href="{{route('courses.index')}}" class="btn btn-warning">no</a>
-       
+      @endif 
       </div>
     </div>
    
