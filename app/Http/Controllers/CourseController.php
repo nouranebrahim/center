@@ -98,6 +98,7 @@ class CourseController extends Controller
         $userId = Auth::id();
         $user = User::find($userId);
         $user->courses()->attach($course);
+        return redirect()->back();
     }
 
 }
