@@ -29,6 +29,8 @@ class CourseController extends Controller
         $users = User::all();
         if (auth()->user()->hasRole('admin')) {
         return view('courses/create',['users'=>$users]);
+        }else{
+            echo "you are unautherized";
         }
     }
 
@@ -67,6 +69,8 @@ class CourseController extends Controller
                 'course' => $course,
                
             ]);
+            }else{
+                echo "you are unautherized";
             }
         
     }
@@ -88,7 +92,9 @@ class CourseController extends Controller
         $courseId = $request->course;
         if (auth()->user()->hasRole('admin')) {
         
-        Course::destroy($courseId);}
+        Course::destroy($courseId);}else{
+            echo "you are unautherized";
+        }
       
         return redirect()->route('courses.index');
 
