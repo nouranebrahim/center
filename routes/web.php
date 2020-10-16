@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify'=>true]);
+// Auth::routes(['verify'=>true]);
 
-Route::get('/courses', [ CourseController::class, 'index'])->name('courses.index')->middleware('verified'); 
+Route::get('/courses', [ CourseController::class, 'index'])->name('courses.index'); 
 Route::get('/courses/create', [ CourseController::class, 'create'])->name('courses.create');  
 Route::post('/courses/store', [ CourseController::class, 'store'])->name('courses.store'); 
 Route::get('/courses/edit', [ CourseController::class, 'edit'])->name('courses.edit');  
@@ -45,4 +45,4 @@ Route::delete('/users/{user}/destroy', [ UserController::class, 'destroy'])->nam
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
