@@ -30,7 +30,10 @@ Route::get('/courses/edit', [ CourseController::class, 'edit'])->name('courses.e
 Route::post('/courses/update', [ CourseController::class, 'update'])->name('courses.update');  
 Route::get('/courses/{course}', [ CourseController::class, 'show'])->name('courses.show');  
 Route::delete('/courses/{course}/destroy', [ CourseController::class, 'destroy'])->name('courses.destroy');  
-Route::get('/enroll/{course}', [ CourseController::class, 'enroll'])->name('courses.enroll'); }); 
+Route::get('/enroll/{course}', [ CourseController::class, 'enroll'])->name('courses.enroll');
+Route::get('/drop/{course}', [ CourseController::class, 'drop'])->name('courses.drop');
+
+}); 
 // ######################################################
 Route::group(['middleware'=>'auth'],function(){
 Route::get('/users', [ UserController::class, 'index'])->name('users.index');

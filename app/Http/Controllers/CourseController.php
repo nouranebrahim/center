@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -105,8 +105,36 @@ class CourseController extends Controller
         $course = Course::find($courseId);
         $userId = Auth::id();
         $user = User::find($userId);
-        $user->courses()->attach($course);
-        return redirect()->back();
+        
+     
+        $cs=DB::table('course_user')->where('course_id',$courseId)->where('user_id',$userId)->first();
+      
+        if(!$cs){
+            $user->courses()->attach($course);
+        }
+        
+        
+        return  view('courses/enroll', [
+            'user' => $user,
+            ]);
+    }
+
+    public function drop(){
+        $request = request();
+        $courseId=$request->course;
+        $course = Course::find($courseId);
+        $userId = Auth::id();
+        $user = User::find($userId);
+        
+     
+        DB::table('course_user')->where('course_id',$courseId)->where('user_id',$userId)->delete();
+      
+      
+        
+        
+        return  view('courses/enroll', [
+            'user' => $user,
+            ]);
     }
 
 }
